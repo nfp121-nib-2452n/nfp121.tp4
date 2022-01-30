@@ -8,48 +8,43 @@ public class PileModele<T> extends  java.util.Observable implements PileI<T> {
 
     private PileI<T> pile;
 
-    /* Ã  complÃ©ter */
+    
 
     public PileModele(PileI<T> pile) {
         this.pile = pile;
     }
 
     public void empiler(T o) throws PilePleineException {
-      pile.empiler(o);
+        
+        pile.empiler(o);
       setChanged();
       notifyObservers(o);
     }
 
     public T depiler() throws PileVideException {
-        return null;
+        T valeur=pile.depiler();
+        setChanged();
+        notifyObservers();
+        return valeur;
     }
 
-    public T sommet() throws PileVideException {
-        return null;
+    public T sommet() throws PileVideException {return pile.sommet();}
+
+    public int taille() {return pile.taille();}
+
+    public int capacite() {return pile.capacite();}
+
+    public boolean estVide() {return pile.estVide();}
+
+    public boolean estPleine() {return pile.estPleine();
     }
 
-    public int taille() {
-        return pile.taille();
-    }
-
-    public int capacite() {
-        return pile.capacite();
-    }
-
-    public boolean estVide() {
-        return pile.estVide();
-    }
-
-    public boolean estPleine() {
-        return pile.estPleine();
-    }
-
-    public String toString() {
-        return pile.toString();
-    }
+    public String toString() {return pile.toString();}
+    
+    public void viderContenu(){}
 }
 
 /**
- * notez qu'un message d'alerte subsiste Ã  la compilation (unsafe ...) dÃ» Ã 
- * l'emploi de notifyObservers, incontournable et sans consÃ©quence ici
+ * notez qu'un message d'alerte subsiste à la compilation (unsafe ...) dû à
+ * l'emploi de notifyObservers, incontournable et sans conséquence ici
  */
